@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+
+    <div class="large-12 columns">
+        <h1>Thank You. Your Invoice.</h1>
+
+        <p>
+            <label for="customerName">Customer Name</label>
+            <span id="customerName">@ViewBag.ShoppingCart.Customer.FullName</span>
+        </p>
+
+        <table>
+            <thead>
+                <th>Description</th>
+                <th>Price</th>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.ShoppingCart.Items)
+                {
+                <tr>
+                    <td>@item.Product.Description</td>
+                    <td>@string.Format("{0:c}", item.Product.Price)</td>
+                </tr>
+                }
+                <tr>
+                    <td>Total</td>
+                    <td><b>@string.Format("{0:c}", ViewBag.ShoppingCart.TotalPrice)</b></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <a href="/">Return to main page.</a>
+        </p>
+    </div>
+</div>

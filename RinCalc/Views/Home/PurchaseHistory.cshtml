@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Purchase History";
+}
+<div class="row">
+    <div class="large-12 columns">
+ 
+        <h1>Purchasing History</h1>
+
+        <table>
+            <tr>
+                <th>Full Name</th>
+                <th>Total Purchase</th>
+            </tr>
+        @foreach (var item in ViewBag.History)
+        {
+            <tr><td>@item.FullName</td><td>@string.Format("{0:c}", item.TotalPrice)</td></tr>
+        }
+        </table>
+
+    </div>
+</div>

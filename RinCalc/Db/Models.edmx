@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="ShoppingCarts" EntityType="Models.Store.ShoppingCarts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShoppingCartItems" EntityType="Models.Store.ShoppingCartItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="Models.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customers" EntityType="Models.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerShoppingCart" Association="Models.Store.CustomerShoppingCart">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+    </AssociationSet>
+    <AssociationSet Name="ShoppingCartShoppingCartItem" Association="Models.Store.ShoppingCartShoppingCartItem">
+      <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+      <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
+    </AssociationSet>
+    <AssociationSet Name="ProductShoppingCartItem" Association="Models.Store.ProductShoppingCartItem">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ShoppingCarts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsCurrent" Type="bit" Nullable="false" />
+    <Property Name="TotalPrice" Type="real" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShoppingCartItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShoppingCartId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="Price" Type="real" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerShoppingCart">
+    <End Role="Customer" Type="Models.Store.Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShoppingCart" Type="Models.Store.ShoppingCarts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ShoppingCartShoppingCartItem">
+    <End Role="ShoppingCart" Type="Models.Store.ShoppingCarts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShoppingCartItem" Type="Models.Store.ShoppingCartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingCart">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCartItem">
+        <PropertyRef Name="ShoppingCartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductShoppingCartItem">
+    <End Role="Product" Type="Models.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShoppingCartItem" Type="Models.Store.ShoppingCartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCartItem">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelsContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ShoppingCarts" EntityType="Models.ShoppingCart" />
+          <EntitySet Name="ShoppingCartItems" EntityType="Models.ShoppingCartItem" />
+          <EntitySet Name="Products" EntityType="Models.Product" />
+          <EntitySet Name="Customers" EntityType="Models.Customer" />
+          <AssociationSet Name="CustomerShoppingCart" Association="Models.CustomerShoppingCart">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+          </AssociationSet>
+          <AssociationSet Name="ShoppingCartShoppingCartItem" Association="Models.ShoppingCartShoppingCartItem">
+            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
+          </AssociationSet>
+          <AssociationSet Name="ProductShoppingCartItem" Association="Models.ProductShoppingCartItem">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ShoppingCart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="IsCurrent" Nullable="false" />
+          <Property Type="Single" Name="TotalPrice" Nullable="false" />
+          <Property Type="Int32" Name="CustomerId" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Models.CustomerShoppingCart" FromRole="ShoppingCart" ToRole="Customer" />
+          <NavigationProperty Name="Items" Relationship="Models.ShoppingCartShoppingCartItem" FromRole="ShoppingCart" ToRole="ShoppingCartItem" />
+        </EntityType>
+        <EntityType Name="ShoppingCartItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ShoppingCartId" Nullable="false" />
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <NavigationProperty Name="ShoppingCart" Relationship="Models.ShoppingCartShoppingCartItem" FromRole="ShoppingCartItem" ToRole="ShoppingCart" />
+          <NavigationProperty Name="Product" Relationship="Models.ProductShoppingCartItem" FromRole="ShoppingCartItem" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Single" Name="Price" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FullName" Nullable="false" />
+          <NavigationProperty Name="ShoppingCarts" Relationship="Models.CustomerShoppingCart" FromRole="Customer" ToRole="ShoppingCart" />
+        </EntityType>
+        <Association Name="CustomerShoppingCart">
+          <End Type="Models.Customer" Role="Customer" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Models.ShoppingCart" Role="ShoppingCart" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ShoppingCartShoppingCartItem">
+          <End Type="Models.ShoppingCart" Role="ShoppingCart" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Models.ShoppingCartItem" Role="ShoppingCartItem" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ShoppingCart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCartItem">
+              <PropertyRef Name="ShoppingCartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductShoppingCartItem">
+          <End Type="Models.Product" Role="Product" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Models.ShoppingCartItem" Role="ShoppingCartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCartItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="ModelsContainer">
+    <EntitySetMapping Name="ShoppingCarts">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.ShoppingCart)">
+        <MappingFragment StoreEntitySet="ShoppingCarts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingCartItems">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.ShoppingCartItem)">
+        <MappingFragment StoreEntitySet="ShoppingCartItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ShoppingCartId" ColumnName="ShoppingCartId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

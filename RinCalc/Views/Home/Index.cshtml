@@ -1,0 +1,51 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="large-12 columns">
+        <h1>Welcome to the Programmer Screening Test</h1>
+
+        <h1>Background</h1>
+        <p>In your answer sheet please state your name, email, year you started programming (including non-professionally), and year you started programming professionally. If you have a github account, or you have a programming related blog, please include it as well.</p>
+
+        <h1>Shopping Cart</h1>
+        <p>
+            Review the following <a href="/ShoppingCart?customerId=1">shopping cart implementation</a>. 
+        It is full of errors and bad practices, identify these and discuss. In particular, see 
+        <code>ShoppingModel.AddProducts</code> and
+        <code>ShoppingModel.DeleteCartItems</code>.
+        </p>
+
+        <p>You can obtain sources here: <a href="https://github.com/teyc/screening">https://github.com/teyc/screening</a></p>
+
+        <p>Please do not submit pull requests as this may facilitate cheating.</p>
+
+        <h2>Purchase History</h2>
+        <p>
+            There are also multiple errors in this <a href="/PurchaseHistory?criteria=">Purchase History</a>. For example, the purchases are made by different people, but the report shows the same entry multiple times.
+            <!-- Hint: Consider whether all resources are disposed. For example. -->
+        </p>
+
+        <h2>SQL queries</h2>
+        <p>The image below shows the database schema. </p>
+        <ul>
+            <li>Write a SQL query to find the names of the customers who have not yet made any purchases.</li>
+            <li>Write a SQL query to find the names of the customers who have no shopping carts.</li>
+        </ul>
+        <img src="/Content/schema.png" />
+
+        <h2>Program Design</h2>
+
+        <p>There are two classes of companies. One company class is a reseller, and the other is a retailer. The manufacturer sells to the reseller, and the reseller on-sells the product to the retailer. The reseller buys product at a higher discount than the retailer. The resellers' discount is 40% from the normal recommended retail price (RRP) while the retailers' discount is 10% from the normal recommended retail price.</p>
+        <p>The manufacturer wants to sell directly to the retailer, but does not want to alienate the reseller. Therefore, where possible, an automatic commission is paid to the retailer's normal reseller.</p>
+        <p>Specify the tables and columns required.</p>
+        <p>How much commission does the manufacturer pay if the retailers buy $1911 worth of product?</p>
+
+        <h2>Command line proficiency</h2>
+        <ol><li>How would you copy all the files in /home/tester/website to /var/www ?</li>
+            <li>Given the sources, how would you find the text "ShoppingCart" using the command line ?</li>
+        </ol>
+        
+    </div>
+</div>

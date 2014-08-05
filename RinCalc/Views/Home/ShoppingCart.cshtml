@@ -1,0 +1,59 @@
+﻿@model RinCalc.Models.ShoppingModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#">Rinstrum Shopping Cart</a></h1>
+            </li>
+            <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+                <li><a href="#">Welcome @Model.CurrentCustomer.FullName</a></li>
+            </ul>
+        </section>
+    </nav>
+
+<form action="UpdateShoppingCart?customerId=@Model.ShoppingCart.CustomerId" method="post">
+    <div class="row">
+
+        <div class="large-6 medium-6 columns">
+            <h2>Product List</h2>
+            <ul>
+                @foreach (var product in Model.Products)
+            {
+                    <li>@product.Description @product.Price
+                        <input type="submit" name="addProduct-@product.Id-@product.Price" value="add" />
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="large-6 medium-6 columns">
+            <h2>Cart Contents</h2>
+            <ul>
+                @foreach (var item in Model.ShoppingCart.Items)
+            {
+                <li>@item.Product.Description @item.Product.Price
+                    <input type="submit" name="deleteCart-@item.Id-@item.Product.Price" value="remove" />
+                </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <h2>Cart Total</h2>
+            <p>@string.Format("{0:c}", Model.ShoppingCart.TotalPrice)</p>
+            <input type="submit" value="Confirm Purchase" name="makePurchase" />
+        </div>
+
+    </div>
+
+</form>
