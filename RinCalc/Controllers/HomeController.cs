@@ -65,6 +65,15 @@ namespace RinCalc.Controllers
             return View();
         }
 
+        public ActionResult RevertDatabase()
+        {
+            System.IO.File.Copy(
+                Server.MapPath("~/App_Data/RinCalc.sample.sdf"),
+                Server.MapPath("~/App_Data/RinCalc.sdf"), 
+                overwrite:true);
+            return Redirect("/?reverted=1");
+        }
+
         public ActionResult Welcome()
         {
             return View();

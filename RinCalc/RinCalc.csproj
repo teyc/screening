@@ -120,6 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\RinCalc.sample.sdf" />
     <Content Include="App_Data\RinCalc.sdf" />
     <Content Include="Content\schema.png" />
     <Content Include="Content\Site.css" />

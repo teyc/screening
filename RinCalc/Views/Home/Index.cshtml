@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="large-12 columns">
+    <div class="large-8 columns">
         <h1>Welcome to the Programmer Screening Test</h1>
 
         <h1>Background</h1>
@@ -55,10 +55,25 @@
         <h2>PHP</h2>
 
         <p>What is the problem with the following statement?</p>
-        <pre><code>
-        &lt;h1>Welcome to our website&lt;/h1>
-        Hello &lt;?php echo($_GET["userName"])?>
+        <pre>
+        &lt;h1>Welcome to our website&lt;/h1&gt;
+        Hello &lt;?php echo($_GET["userName"])?&gt;
 
-             </code></pre>
+        </pre>
+    </div>
+
+    <div class="large-4 columns">
+        
+        <div class="panel">
+            <p>If errors occur on this test site, the database can be reverted here.</p>
+            @if (Request["reverted"] != null)
+            {
+                <em>Database Reverted.</em>
+            }
+            else
+            {
+                <p><a href="/RevertDatabase" class="medium alert button">Revert</a></p>
+            }
+        </div>
     </div>
 </div>
